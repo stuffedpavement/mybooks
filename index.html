@@ -760,7 +760,7 @@ function renderTable() {
   tbody.innerHTML = slice.map(b => `
     <tr>
       <td class="td-year">${b.year}</td>
-      <td class="td-title">${b.title}${b.book_club==='Y'?' <span class="pill pill-bc">BC</span>':''}</td>
+      <td class="td-title">${b.title}</td>
       <td class="td-author">${b.author}</td>
       <td class="td-nat">${b.primary_nationality||''}</td>
       <td class="td-pages">${b.pages||'—'}</td>
