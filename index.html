@@ -38,7 +38,6 @@
     padding: 2.5rem 0 1.5rem;
     text-align: center;
     background: var(--paper);
-    position: relative;
   }
   .masthead::before {
     content: '';
@@ -48,7 +47,6 @@
     margin-bottom: 0.5rem;
   }
   .masthead-kicker {
-    font-family: var(--body);
     font-size: 0.7rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -61,14 +59,9 @@
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--ink);
   }
-  .masthead h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
+  .masthead h1 em { font-style: italic; color: var(--accent); }
   .masthead-sub {
-    font-family: var(--body);
     font-size: 0.85rem;
     color: var(--ink-faint);
     margin-top: 0.5rem;
@@ -105,19 +98,53 @@
     display: block;
   }
 
-  /* ---- LAYOUT ---- */
+  /* ---- TABS ---- */
+  .tab-nav {
+    display: flex;
+    background: var(--paper-dark);
+    border-bottom: 2px solid var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-right: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-faint);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .tab-btn:hover { color: var(--ink); background: var(--paper-darker); }
+  .tab-btn.active {
+    color: var(--ink);
+    background: var(--paper);
+    font-weight: 600;
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  /* ---- TAB PANELS ---- */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ---- PAGE WRAP ---- */
   .page-wrap {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 1.5rem;
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 2rem;
-    padding: 2rem 0;
-    align-items: start;
   }
 
   /* ---- SECTION HEADERS ---- */
@@ -133,7 +160,9 @@
     margin-bottom: 1.2rem;
   }
 
-  /* ---- TIMELINE CHART ---- */
+  /* ---- BROWSE TAB ---- */
+  #panel-browse { padding: 2rem 0; }
+
   #timeline-section { margin-bottom: 2rem; }
   #timeline-wrap {
     position: relative;
@@ -157,7 +186,6 @@
     width: 100%;
     background: var(--ink-light);
     transition: background 0.15s;
-    position: relative;
   }
   .bar-col:hover .bar-inner,
   .bar-col.active .bar-inner { background: var(--accent); }
@@ -206,10 +234,7 @@
     appearance: none;
     cursor: pointer;
   }
-  .filters input[type=text] {
-    flex: 1;
-    min-width: 180px;
-  }
+  .filters input[type=text] { flex: 1; min-width: 180px; }
   .filter-label {
     font-size: 0.65rem;
     letter-spacing: 0.15em;
@@ -225,7 +250,6 @@
     background: transparent;
     color: var(--accent);
     cursor: pointer;
-    letter-spacing: 0.05em;
   }
   .btn-clear:hover { background: var(--accent); color: var(--paper); }
 
@@ -264,28 +288,14 @@
     transition: background 0.1s;
   }
   #book-table tbody tr:hover { background: var(--accent-pale); }
-  #book-table td {
-    padding: 0.45rem 0.5rem;
-    vertical-align: top;
-  }
-  .td-title {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--ink);
-    font-size: 0.88rem;
-  }
+  #book-table td { padding: 0.45rem 0.5rem; vertical-align: top; }
+  .td-title { font-family: var(--serif); font-style: italic; font-size: 0.88rem; }
   .td-author { color: var(--ink-light); }
-  .td-year {
-    font-family: var(--serif);
-    font-weight: 700;
-    color: var(--accent);
-    white-space: nowrap;
-  }
+  .td-year { font-family: var(--serif); font-weight: 700; color: var(--accent); white-space: nowrap; }
   .td-nat { color: var(--ink-faint); font-size: 0.78rem; }
   .td-pages { color: var(--ink-faint); text-align: right; }
   .td-rating { text-align: center; white-space: nowrap; }
   .star { color: var(--accent); font-size: 0.7rem; }
-  .star-empty { color: var(--rule); font-size: 0.7rem; }
   .pill {
     display: inline-block;
     font-size: 0.62rem;
@@ -297,54 +307,6 @@
   .pill-f { background: var(--accent-pale); color: var(--accent); }
   .pill-nf { background: var(--paper-darker); color: var(--ink-faint); }
   .pill-bc { background: var(--ink); color: var(--paper); }
-
-  /* ---- SIDEBAR ---- */
-  .sidebar { position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow-y: auto; }
-  .sidebar-block { margin-bottom: 1.8rem; }
-  .mini-bar-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.35rem;
-    font-size: 0.8rem;
-  }
-  .mini-bar-label { width: 100px; color: var(--ink-light); flex-shrink: 0; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .mini-bar-track { flex: 1; height: 8px; background: var(--paper-darker); }
-  .mini-bar-fill { height: 100%; background: var(--ink-light); transition: width 0.4s; }
-  .mini-bar-count { width: 28px; text-align: right; color: var(--ink-faint); font-size: 0.75rem; flex-shrink: 0; }
-
-  .donut-wrap { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
-  .donut-legend { font-size: 0.78rem; line-height: 1.9; }
-  .donut-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-
-  /* Most-read authors */
-  .author-list { list-style: none; }
-  .author-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.3rem 0;
-    border-bottom: 1px dotted var(--rule);
-    font-size: 0.82rem;
-  }
-  .author-list li:last-child { border-bottom: none; }
-  .author-count {
-    font-family: var(--serif);
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 1rem;
-  }
-
-  /* ---- FOOTER ---- */
-  footer {
-    border-top: 3px double var(--ink);
-    padding: 1.5rem 0;
-    text-align: center;
-    font-size: 0.72rem;
-    color: var(--ink-faint);
-    font-style: italic;
-    margin-top: 2rem;
-  }
 
   /* ---- PAGINATION ---- */
   .pagination {
@@ -364,23 +326,147 @@
     font-family: var(--body);
     font-size: 0.78rem;
   }
-  .page-btn:hover, .page-btn.active {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
+  .page-btn:hover, .page-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .page-info { color: var(--ink-faint); font-style: italic; margin-left: 0.5rem; }
 
+  /* ---- CHARTS TAB ---- */
+  #panel-charts { padding: 2rem 0; }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+  .chart-block { }
+  .chart-block.full-width { grid-column: 1 / -1; }
+
+  /* Mini bars */
+  .mini-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.82rem;
+  }
+  .mini-bar-label {
+    width: 130px;
+    color: var(--ink-light);
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mini-bar-track { flex: 1; height: 10px; background: var(--paper-darker); }
+  .mini-bar-fill { height: 100%; background: var(--ink-light); transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+  .mini-bar-fill.accent { background: var(--accent); }
+  .mini-bar-count { width: 32px; text-align: right; color: var(--ink-faint); font-size: 0.75rem; flex-shrink: 0; }
+  .mini-bar-pct { width: 36px; text-align: right; color: var(--ink-faint); font-size: 0.72rem; flex-shrink: 0; }
+
+  /* Donuts */
+  .donut-row {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .donut-item { display: flex; gap: 1.2rem; align-items: center; }
+  .donut-legend { font-size: 0.82rem; line-height: 2.1; }
+  .donut-dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .donut-label-val { color: var(--ink-faint); font-size: 0.75rem; }
+
+  /* Author list */
+  .author-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 2rem;
+  }
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 0.85rem;
+  }
+  .author-count {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.05rem;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  /* Timeline in charts tab */
+  #timeline-charts-wrap {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    padding-bottom: 32px;
+    margin-top: 0.5rem;
+  }
+  .cbar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+  }
+  .cbar-inner {
+    width: 100%;
+    background: var(--ink-light);
+    transition: background 0.2s;
+  }
+  .cbar-col:hover .cbar-inner { background: var(--accent); }
+  .cbar-label {
+    position: absolute;
+    bottom: -26px;
+    font-size: 0.58rem;
+    color: var(--ink-faint);
+    transform: rotate(-45deg);
+    transform-origin: top left;
+    white-space: nowrap;
+  }
+  .cbar-count {
+    position: absolute;
+    top: -17px;
+    font-size: 0.65rem;
+    color: var(--ink-faint);
+    font-family: var(--serif);
+  }
+  .cbar-col:hover .cbar-count { color: var(--accent); font-weight: 700; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 3px double var(--ink);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-top: 2rem;
+  }
+
   @media (max-width: 900px) {
-    .two-col { grid-template-columns: 1fr; }
-    .sidebar { position: static; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-block.full-width { grid-column: 1; }
     .stats-strip { grid-template-columns: repeat(3, 1fr); }
-    .stats-strip .stat-item:nth-child(4),
-    .stats-strip .stat-item:nth-child(5) { border-top: 1px solid var(--rule); }
   }
   @media (max-width: 600px) {
     .stats-strip { grid-template-columns: repeat(2, 1fr); }
     #book-table .td-nat, #book-table .td-pages { display: none; }
+    .tab-btn { padding: 0.8rem 1rem; font-size: 0.65rem; }
   }
 </style>
 </head>
@@ -393,122 +479,127 @@
 </header>
 
 <div class="stats-strip">
-  <div class="stat-item">
-    <span class="stat-num">452</span>
-    <span class="stat-label">Books</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">29</span>
-    <span class="stat-label">Years</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num" id="stat-pages">139,184</span>
-    <span class="stat-label">Pages</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">39</span>
-    <span class="stat-label">Nationalities</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">216</span>
-    <span class="stat-label">Rated</span>
+  <div class="stat-item"><span class="stat-num">452</span><span class="stat-label">Books</span></div>
+  <div class="stat-item"><span class="stat-num">29</span><span class="stat-label">Years</span></div>
+  <div class="stat-item"><span class="stat-num">139,184</span><span class="stat-label">Pages</span></div>
+  <div class="stat-item"><span class="stat-num">39</span><span class="stat-label">Nationalities</span></div>
+  <div class="stat-item"><span class="stat-num">216</span><span class="stat-label">Rated</span></div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="browse">Browse Books</button>
+  <button class="tab-btn" data-tab="charts">Charts &amp; Stats</button>
+</nav>
+
+<!-- ===================== BROWSE TAB ===================== -->
+<div id="panel-browse" class="tab-panel active">
+  <div class="page-wrap">
+
+    <section id="timeline-section">
+      <p class="section-head">Books Read per Year</p>
+      <div id="timeline-wrap"></div>
+      <p class="timeline-note" id="timeline-note">Click a bar to filter by year &mdash; click again to clear</p>
+    </section>
+
+    <div class="filters">
+      <span class="filter-label">Filter</span>
+      <input type="text" id="search" placeholder="Search title or author&hellip;">
+      <select id="f-gender">
+        <option value="">All genders</option>
+        <option value="F">Women</option>
+        <option value="M">Men</option>
+      </select>
+      <select id="f-fiction">
+        <option value="">Fiction &amp; nonfiction</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Nonfiction">Nonfiction</option>
+      </select>
+      <select id="f-lang">
+        <option value="">All languages</option>
+      </select>
+      <select id="f-nat">
+        <option value="">All nationalities</option>
+      </select>
+      <select id="f-rating">
+        <option value="">Any rating</option>
+        <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; only</option>
+        <option value="4">&#9733;&#9733;&#9733;&#9733; and above</option>
+        <option value="3">&#9733;&#9733;&#9733; and above</option>
+      </select>
+      <button class="btn-clear" id="btn-clear">Clear all</button>
+    </div>
+
+    <p class="result-count" id="result-count"></p>
+    <table id="book-table">
+      <thead>
+        <tr>
+          <th data-col="year">Year<span class="sort-arrow"></span></th>
+          <th data-col="title">Title<span class="sort-arrow"></span></th>
+          <th data-col="author">Author<span class="sort-arrow"></span></th>
+          <th data-col="primary_nationality" class="td-nat">Nationality<span class="sort-arrow"></span></th>
+          <th data-col="pages" class="td-pages">Pages<span class="sort-arrow"></span></th>
+          <th data-col="fiction">Type<span class="sort-arrow"></span></th>
+          <th data-col="rating">Rating<span class="sort-arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="book-tbody"></tbody>
+    </table>
+    <div class="pagination" id="pagination"></div>
+
   </div>
 </div>
 
-<div class="page-wrap">
-  <div class="two-col">
+<!-- ===================== CHARTS TAB ===================== -->
+<div id="panel-charts" class="tab-panel">
+  <div class="page-wrap">
+    <div class="charts-grid">
 
-    <!-- MAIN COLUMN -->
-    <main>
-      <section id="timeline-section">
+      <!-- Full-width timeline -->
+      <div class="chart-block full-width">
         <p class="section-head">Books Read per Year</p>
-        <div id="timeline-wrap"></div>
-        <p class="timeline-note" id="timeline-note">Click a bar to filter by year &mdash; click again to clear</p>
-      </section>
-
-      <div class="filters">
-        <span class="filter-label">Filter</span>
-        <input type="text" id="search" placeholder="Search title or author…">
-        <select id="f-gender">
-          <option value="">All genders</option>
-          <option value="F">Women</option>
-          <option value="M">Men</option>
-        </select>
-        <select id="f-fiction">
-          <option value="">Fiction &amp; nonfiction</option>
-          <option value="Fiction">Fiction</option>
-          <option value="Nonfiction">Nonfiction</option>
-        </select>
-        <select id="f-lang">
-          <option value="">All languages</option>
-        </select>
-        <select id="f-nat">
-          <option value="">All nationalities</option>
-        </select>
-        <select id="f-rating">
-          <option value="">Any rating</option>
-          <option value="5">★★★★★ only</option>
-          <option value="4">★★★★ and above</option>
-          <option value="3">★★★ and above</option>
-        </select>
-        <button class="btn-clear" id="btn-clear">Clear all</button>
+        <div id="timeline-charts-wrap"></div>
       </div>
 
-      <p class="result-count" id="result-count"></p>
-      <table id="book-table">
-        <thead>
-          <tr>
-            <th data-col="year">Year<span class="sort-arrow"></span></th>
-            <th data-col="title">Title<span class="sort-arrow"></span></th>
-            <th data-col="author">Author<span class="sort-arrow"></span></th>
-            <th data-col="primary_nationality" class="td-nat">Nationality<span class="sort-arrow"></span></th>
-            <th data-col="pages" class="td-pages">Pages<span class="sort-arrow"></span></th>
-            <th data-col="fiction">Type<span class="sort-arrow"></span></th>
-            <th data-col="rating">Rating<span class="sort-arrow"></span></th>
-          </tr>
-        </thead>
-        <tbody id="book-tbody"></tbody>
-      </table>
-      <div class="pagination" id="pagination"></div>
-    </main>
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-      <div class="sidebar-block">
-        <p class="section-head">Most-Read Authors</p>
-        <ul class="author-list" id="author-list"></ul>
-      </div>
-
-      <div class="sidebar-block">
+      <!-- Nationality -->
+      <div class="chart-block">
         <p class="section-head">By Nationality</p>
         <div id="nat-bars"></div>
       </div>
 
-      <div class="sidebar-block">
+      <!-- Most-read authors -->
+      <div class="chart-block">
+        <p class="section-head">Most-Read Authors</p>
+        <div class="author-grid" id="author-list"></div>
+      </div>
+
+      <!-- Gender + Fiction donuts -->
+      <div class="chart-block">
         <p class="section-head">Gender &amp; Type</p>
-        <div id="gender-donut-wrap" class="donut-wrap">
-          <svg id="gender-donut" width="80" height="80" viewBox="0 0 80 80"></svg>
-          <div class="donut-legend" id="gender-legend"></div>
-        </div>
-        <div id="fiction-donut-wrap" class="donut-wrap">
-          <svg id="fiction-donut" width="80" height="80" viewBox="0 0 80 80"></svg>
-          <div class="donut-legend" id="fiction-legend"></div>
+        <div class="donut-row">
+          <div class="donut-item">
+            <svg id="gender-donut" width="90" height="90" viewBox="0 0 90 90"></svg>
+            <div class="donut-legend" id="gender-legend"></div>
+          </div>
+          <div class="donut-item">
+            <svg id="fiction-donut" width="90" height="90" viewBox="0 0 90 90"></svg>
+            <div class="donut-legend" id="fiction-legend"></div>
+          </div>
         </div>
       </div>
 
-      <div class="sidebar-block">
+      <!-- Language -->
+      <div class="chart-block">
         <p class="section-head">Original Language</p>
         <div id="lang-bars"></div>
       </div>
 
-    </aside>
+    </div>
   </div>
 </div>
 
 <footer>
   <div class="page-wrap">
-    Data sourced from personal reading notes (1998–2026) and Goodreads export &nbsp;·&nbsp; Built with HTML &amp; vanilla JS
+    Data sourced from personal reading notes (1998&ndash;2026) and Goodreads export &nbsp;&middot;&nbsp; Built with HTML &amp; vanilla JS
   </div>
 </footer>
 
@@ -518,7 +609,7 @@ const BOOKS = [{"year": 2026, "title": "Transcription", "author": "Ben Lerner", 
 // ---- UTILITIES ----
 function counter(arr) {
   const c = {};
-  arr.forEach(v => { c[v] = (c[v] || 0) + 1; });
+  arr.forEach(v => { c[v] = (c[v]||0)+1; });
   return c;
 }
 function sortedCounter(arr) {
@@ -526,7 +617,7 @@ function sortedCounter(arr) {
 }
 function stars(n) {
   if (!n) return '<span style="color:var(--ink-faint);font-size:0.7rem">—</span>';
-  return '★'.repeat(n).split('').map(s => `<span class="star">${s}</span>`).join('');
+  return Array(n).fill('<span class="star">★</span>').join('');
 }
 
 // ---- STATE ----
@@ -537,6 +628,26 @@ let sortDir = 'desc';
 let page = 1;
 const PER_PAGE = 50;
 
+// ---- TABS ----
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---- DROPDOWNS ----
+function populateDropdowns() {
+  const langs = [...new Set(BOOKS.map(b => b.language).filter(Boolean))].sort();
+  const langSel = document.getElementById('f-lang');
+  langs.forEach(l => { const o = document.createElement('option'); o.value=l; o.textContent=l; langSel.appendChild(o); });
+  const nats = [...new Set(BOOKS.map(b => b.primary_nationality).filter(Boolean))].sort();
+  const natSel = document.getElementById('f-nat');
+  nats.forEach(n => { const o = document.createElement('option'); o.value=n; o.textContent=n; natSel.appendChild(o); });
+}
+
 // ---- FILTERS ----
 function getFilters() {
   return {
@@ -545,7 +656,7 @@ function getFilters() {
     fiction: document.getElementById('f-fiction').value,
     lang: document.getElementById('f-lang').value,
     nat: document.getElementById('f-nat').value,
-    rating: parseInt(document.getElementById('f-rating').value) || 0,
+    rating: parseInt(document.getElementById('f-rating').value)||0,
   };
 }
 
@@ -567,30 +678,17 @@ function applyFilters() {
 }
 
 function sortBooks(arr) {
-  return [...arr].sort((a, b) => {
+  return [...arr].sort((a,b) => {
     let va = a[sortCol], vb = b[sortCol];
-    if (va === null || va === undefined || va === '') va = sortDir === 'asc' ? Infinity : -Infinity;
-    if (vb === null || vb === undefined || vb === '') vb = sortDir === 'asc' ? Infinity : -Infinity;
-    if (typeof va === 'string') va = va.toLowerCase();
-    if (typeof vb === 'string') vb = vb.toLowerCase();
-    if (va < vb) return sortDir === 'asc' ? -1 : 1;
-    if (va > vb) return sortDir === 'asc' ? 1 : -1;
-    return 0;
+    if (va===null||va===undefined||va==='') va = sortDir==='asc' ? Infinity : -Infinity;
+    if (vb===null||vb===undefined||vb==='') vb = sortDir==='asc' ? Infinity : -Infinity;
+    if (typeof va==='string') va = va.toLowerCase();
+    if (typeof vb==='string') vb = vb.toLowerCase();
+    return va<vb ? (sortDir==='asc'?-1:1) : va>vb ? (sortDir==='asc'?1:-1) : 0;
   });
 }
 
-// ---- POPULATE DROPDOWNS ----
-function populateDropdowns() {
-  const langs = [...new Set(BOOKS.map(b => b.language).filter(Boolean))].sort();
-  const langSel = document.getElementById('f-lang');
-  langs.forEach(l => { const o = document.createElement('option'); o.value = l; o.textContent = l; langSel.appendChild(o); });
-
-  const nats = [...new Set(BOOKS.map(b => b.primary_nationality).filter(Boolean))].sort();
-  const natSel = document.getElementById('f-nat');
-  nats.forEach(n => { const o = document.createElement('option'); o.value = n; o.textContent = n; natSel.appendChild(o); });
-}
-
-// ---- TIMELINE ----
+// ---- TIMELINE (browse) ----
 function buildTimeline() {
   const byYear = counter(BOOKS.map(b => b.year));
   const years = Object.keys(byYear).map(Number).sort();
@@ -599,20 +697,39 @@ function buildTimeline() {
   wrap.innerHTML = '';
   years.forEach(y => {
     const count = byYear[y];
-    const pct = (count / maxCount) * 100;
+    const pct = (count/maxCount)*100;
     const col = document.createElement('div');
-    col.className = 'bar-col' + (y === activeYear ? ' active' : '');
+    col.className = 'bar-col' + (y===activeYear?' active':'');
     col.innerHTML = `<span class="bar-count">${count}</span>
       <div class="bar-inner" style="height:${pct}%"></div>
       <span class="bar-label">${y}</span>`;
     col.addEventListener('click', () => {
-      activeYear = (activeYear === y) ? null : y;
+      activeYear = (activeYear===y) ? null : y;
       buildTimeline();
       applyFilters();
-      document.getElementById('timeline-note').textContent =
-        activeYear ? `Showing ${byYear[activeYear]} books from ${activeYear} — click bar again to clear` :
-        'Click a bar to filter by year — click again to clear';
+      document.getElementById('timeline-note').textContent = activeYear
+        ? `Showing ${byYear[activeYear]} books from ${activeYear} — click bar again to clear`
+        : 'Click a bar to filter by year — click again to clear';
     });
+    wrap.appendChild(col);
+  });
+}
+
+// ---- TIMELINE (charts tab) ----
+function buildChartsTimeline() {
+  const byYear = counter(BOOKS.map(b => b.year));
+  const years = Object.keys(byYear).map(Number).sort();
+  const maxCount = Math.max(...Object.values(byYear));
+  const wrap = document.getElementById('timeline-charts-wrap');
+  wrap.innerHTML = '';
+  years.forEach(y => {
+    const count = byYear[y];
+    const pct = (count/maxCount)*100;
+    const col = document.createElement('div');
+    col.className = 'cbar-col';
+    col.innerHTML = `<span class="cbar-count">${count}</span>
+      <div class="cbar-inner" style="height:${pct}%"></div>
+      <span class="cbar-label">${y}</span>`;
     wrap.appendChild(col);
   });
 }
@@ -621,22 +738,22 @@ function buildTimeline() {
 function renderTable() {
   const tbody = document.getElementById('book-tbody');
   const totalFiltered = filtered.length;
-  const totalPages = Math.ceil(totalFiltered / PER_PAGE);
-  if (page > totalPages) page = Math.max(1, totalPages);
-  const start = (page - 1) * PER_PAGE;
-  const slice = filtered.slice(start, start + PER_PAGE);
+  const totalPages = Math.ceil(totalFiltered/PER_PAGE);
+  if (page>totalPages) page = Math.max(1,totalPages);
+  const start = (page-1)*PER_PAGE;
+  const slice = filtered.slice(start, start+PER_PAGE);
 
   document.getElementById('result-count').textContent =
-    `Showing ${start+1}–${Math.min(start+PER_PAGE, totalFiltered)} of ${totalFiltered} books`;
+    `Showing ${start+1}–${Math.min(start+PER_PAGE,totalFiltered)} of ${totalFiltered} books`;
 
   tbody.innerHTML = slice.map(b => `
     <tr>
       <td class="td-year">${b.year}</td>
-      <td class="td-title">${b.title}${b.book_club === 'Y' ? ' <span class="pill pill-bc">BC</span>' : ''}</td>
+      <td class="td-title">${b.title}${b.book_club==='Y'?' <span class="pill pill-bc">BC</span>':''}</td>
       <td class="td-author">${b.author}</td>
-      <td class="td-nat">${b.primary_nationality || ''}</td>
-      <td class="td-pages">${b.pages || '—'}</td>
-      <td><span class="pill ${b.fiction === 'Fiction' ? 'pill-f' : 'pill-nf'}">${b.fiction === 'Fiction' ? 'F' : 'NF'}</span></td>
+      <td class="td-nat">${b.primary_nationality||''}</td>
+      <td class="td-pages">${b.pages||'—'}</td>
+      <td><span class="pill ${b.fiction==='Fiction'?'pill-f':'pill-nf'}">${b.fiction==='Fiction'?'F':'NF'}</span></td>
       <td class="td-rating">${stars(b.rating)}</td>
     </tr>`).join('');
 
@@ -645,20 +762,20 @@ function renderTable() {
 
 function renderPagination(totalPages) {
   const pag = document.getElementById('pagination');
-  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  if (totalPages<=1) { pag.innerHTML=''; return; }
   let html = '';
   const delta = 2;
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1 || i === totalPages || (i >= page - delta && i <= page + delta)) {
-      html += `<button class="page-btn${i === page ? ' active' : ''}" data-p="${i}">${i}</button>`;
-    } else if (i === page - delta - 1 || i === page + delta + 1) {
+  for (let i=1; i<=totalPages; i++) {
+    if (i===1||i===totalPages||(i>=page-delta&&i<=page+delta)) {
+      html += `<button class="page-btn${i===page?' active':''}" data-p="${i}">${i}</button>`;
+    } else if (i===page-delta-1||i===page+delta+1) {
       html += `<span style="color:var(--ink-faint);align-self:center">…</span>`;
     }
   }
   html += `<span class="page-info">Page ${page} of ${totalPages}</span>`;
   pag.innerHTML = html;
   pag.querySelectorAll('.page-btn').forEach(btn => {
-    btn.addEventListener('click', () => { page = parseInt(btn.dataset.p); renderTable(); window.scrollTo(0,0); });
+    btn.addEventListener('click', () => { page=parseInt(btn.dataset.p); renderTable(); window.scrollTo(0,0); });
   });
 }
 
@@ -667,117 +784,100 @@ function initSort() {
   document.querySelectorAll('#book-table thead th[data-col]').forEach(th => {
     th.addEventListener('click', () => {
       const col = th.dataset.col;
-      if (sortCol === col) {
-        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-      } else {
-        sortCol = col;
-        sortDir = col === 'year' ? 'desc' : 'asc';
-      }
+      sortDir = (sortCol===col && sortDir==='asc') ? 'desc' : (sortCol===col ? 'asc' : (col==='year'?'desc':'asc'));
+      sortCol = col;
       document.querySelectorAll('#book-table thead th').forEach(t => t.classList.remove('sort-asc','sort-desc'));
-      th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+      th.classList.add(sortDir==='asc'?'sort-asc':'sort-desc');
       filtered = sortBooks(filtered);
       page = 1;
       renderTable();
     });
   });
-  // Set initial sort indicator
   document.querySelector('[data-col="year"]').classList.add('sort-desc');
 }
 
-// ---- SIDEBAR: MINI BARS ----
-function buildMiniBar(containerId, data, total, clickable) {
+// ---- MINI BARS ----
+function buildMiniBar(containerId, data, total, accent) {
   const wrap = document.getElementById(containerId);
   wrap.innerHTML = '';
   data.forEach(([label, count]) => {
-    const pct = (count / total) * 100;
+    const pct = (count/total)*100;
     const row = document.createElement('div');
     row.className = 'mini-bar-row';
-    if (clickable) row.style.cursor = 'pointer';
     row.innerHTML = `
       <span class="mini-bar-label" title="${label}">${label}</span>
-      <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%"></div></div>
-      <span class="mini-bar-count">${count}</span>`;
-    if (clickable) {
-      row.addEventListener('click', () => {
-        const natSel = document.getElementById('f-nat');
-        natSel.value = natSel.value === label ? '' : label;
-        applyFilters();
-      });
-    }
+      <div class="mini-bar-track"><div class="mini-bar-fill${accent?' accent':''}" style="width:${pct}%"></div></div>
+      <span class="mini-bar-count">${count}</span>
+      <span class="mini-bar-pct">${Math.round(pct)}%</span>`;
     wrap.appendChild(row);
   });
 }
 
-// ---- SIDEBAR: DONUT ----
+// ---- DONUT ----
 function buildDonut(svgId, legendId, data, colors) {
-  const total = data.reduce((s,[,v]) => s+v, 0);
+  const total = data.reduce((s,[,v])=>s+v,0);
   const svg = document.getElementById(svgId);
-  const cx = 40, cy = 40, r = 32, ir = 20;
-  let angle = -Math.PI / 2;
+  const cx=45, cy=45, r=38, ir=22;
+  let angle = -Math.PI/2;
   let paths = '';
-  data.forEach(([label, count], i) => {
-    const slice = (count / total) * Math.PI * 2;
-    const x1 = cx + r * Math.cos(angle), y1 = cy + r * Math.sin(angle);
+  data.forEach(([label,count],i) => {
+    const slice = (count/total)*Math.PI*2;
+    const x1=cx+r*Math.cos(angle), y1=cy+r*Math.sin(angle);
     angle += slice;
-    const x2 = cx + r * Math.cos(angle), y2 = cy + r * Math.sin(angle);
-    const ix1 = cx + ir * Math.cos(angle - slice), iy1 = cy + ir * Math.sin(angle - slice);
-    const ix2 = cx + ir * Math.cos(angle), iy2 = cy + ir * Math.sin(angle);
-    const large = slice > Math.PI ? 1 : 0;
+    const x2=cx+r*Math.cos(angle), y2=cy+r*Math.sin(angle);
+    const ix1=cx+ir*Math.cos(angle-slice), iy1=cy+ir*Math.sin(angle-slice);
+    const ix2=cx+ir*Math.cos(angle), iy2=cy+ir*Math.sin(angle);
+    const large = slice>Math.PI?1:0;
     paths += `<path d="M${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} L${ix2},${iy2} A${ir},${ir} 0 ${large},0 ${ix1},${iy1} Z" fill="${colors[i]}" opacity="0.9"/>`;
   });
   svg.innerHTML = paths;
   const legend = document.getElementById(legendId);
-  legend.innerHTML = data.map(([label, count], i) =>
-    `<div><span class="donut-dot" style="background:${colors[i]}"></span>${label}: <strong>${Math.round(count/total*100)}%</strong></div>`
+  legend.innerHTML = data.map(([label,count],i) =>
+    `<div><span class="donut-dot" style="background:${colors[i]}"></span>${label} <span class="donut-label-val">${count} (${Math.round(count/total*100)}%)</span></div>`
   ).join('');
 }
 
 // ---- AUTHOR LIST ----
 function buildAuthorList() {
   const counts = counter(BOOKS.map(b => b.author));
-  const multi = Object.entries(counts).filter(([,c]) => c > 1).sort((a,b) => b[1]-a[1]).slice(0, 12);
-  const ul = document.getElementById('author-list');
-  ul.innerHTML = multi.map(([author, count]) =>
-    `<li><span>${author}</span><span class="author-count">${count}</span></li>`
+  const multi = Object.entries(counts).filter(([,c])=>c>1).sort((a,b)=>b[1]-a[1]).slice(0,16);
+  const wrap = document.getElementById('author-list');
+  wrap.innerHTML = multi.map(([author,count]) =>
+    `<div class="author-row"><span>${author}</span><span class="author-count">${count}</span></div>`
   ).join('');
 }
 
 // ---- INIT ----
 populateDropdowns();
 buildTimeline();
+buildChartsTimeline();
 buildAuthorList();
 
-// Nationality bars (top 12, clickable)
-const natData = sortedCounter(BOOKS.map(b => b.primary_nationality).filter(Boolean)).slice(0, 12);
+const natData = sortedCounter(BOOKS.map(b=>b.primary_nationality).filter(Boolean)).slice(0,15);
 buildMiniBar('nat-bars', natData, BOOKS.length, true);
 
-// Language bars
-const langData = sortedCounter(BOOKS.map(b => b.language).filter(Boolean));
+const langData = sortedCounter(BOOKS.map(b=>b.language).filter(Boolean));
 buildMiniBar('lang-bars', langData, BOOKS.length, false);
 
-// Donuts
-const genderData = sortedCounter(BOOKS.map(b => b.gender).filter(b => b && b !== 'Mixed'));
-buildDonut('gender-donut', 'gender-legend', genderData, ['#2C5F7C','#8b2e0e']);
+const genderData = sortedCounter(BOOKS.map(b=>b.gender).filter(b=>b&&b!=='Mixed'));
+buildDonut('gender-donut','gender-legend', genderData, ['#2C5F7C','#8b2e0e']);
 
-const fictionData = sortedCounter(BOOKS.map(b => b.fiction).filter(Boolean));
-buildDonut('fiction-donut', 'fiction-legend', fictionData, ['#8b2e0e','#4a4540']);
+const fictionData = sortedCounter(BOOKS.map(b=>b.fiction).filter(Boolean));
+buildDonut('fiction-donut','fiction-legend', fictionData, ['#8b2e0e','#4a4540']);
 
-// Initial table
 applyFilters();
 initSort();
 
-// Event listeners
 ['search','f-gender','f-fiction','f-lang','f-nat','f-rating'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => { page = 1; applyFilters(); });
+  document.getElementById(id).addEventListener('input', () => { page=1; applyFilters(); });
 });
 document.getElementById('btn-clear').addEventListener('click', () => {
-  ['f-gender','f-fiction','f-lang','f-nat','f-rating'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('search').value = '';
+  ['f-gender','f-fiction','f-lang','f-nat','f-rating'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('search').value='';
   activeYear = null;
   buildTimeline();
   document.getElementById('timeline-note').textContent = 'Click a bar to filter by year — click again to clear';
-  page = 1;
-  applyFilters();
+  page=1; applyFilters();
 });
 </script>
 </body>
