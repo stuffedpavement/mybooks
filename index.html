@@ -101,39 +101,50 @@
   /* ---- TABS ---- */
   .tab-nav {
     display: flex;
-    background: var(--paper-dark);
-    border-bottom: 2px solid var(--ink);
+    background: var(--accent);
+    border-bottom: 3px solid #6b1e06;
     position: sticky;
     top: 0;
     z-index: 100;
   }
   .tab-btn {
-    font-family: var(--body);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 0.9rem 2rem;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1rem 2.5rem;
     border: none;
-    border-right: 1px solid var(--rule);
+    border-right: 1px solid rgba(255,255,255,0.2);
     background: transparent;
-    color: var(--ink-faint);
+    color: rgba(255,255,255,0.6);
     cursor: pointer;
     transition: all 0.15s;
     position: relative;
   }
-  .tab-btn:hover { color: var(--ink); background: var(--paper-darker); }
-  .tab-btn.active {
-    color: var(--ink);
-    background: var(--paper);
-    font-weight: 600;
+  .tab-btn::before {
+    content: '';
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    margin-right: 0.6rem;
+    vertical-align: middle;
+    transition: background 0.15s;
   }
+  .tab-btn:hover { color: #fff; background: rgba(0,0,0,0.12); }
+  .tab-btn:hover::before { background: rgba(255,255,255,0.8); }
+  .tab-btn.active {
+    color: #fff;
+    background: rgba(0,0,0,0.18);
+  }
+  .tab-btn.active::before { background: #fff; }
   .tab-btn.active::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -3px;
     left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
+    height: 3px;
+    background: #fff;
   }
 
   /* ---- TAB PANELS ---- */
@@ -487,12 +498,12 @@
 </div>
 
 <nav class="tab-nav">
-  <button class="tab-btn active" data-tab="browse">Browse Books</button>
-  <button class="tab-btn" data-tab="charts">Charts &amp; Stats</button>
+  <button class="tab-btn active" data-tab="charts">Charts &amp; Stats</button>
+  <button class="tab-btn" data-tab="browse">Browse Books</button>
 </nav>
 
 <!-- ===================== BROWSE TAB ===================== -->
-<div id="panel-browse" class="tab-panel active">
+<div id="panel-browse" class="tab-panel">
   <div class="page-wrap">
 
     <section id="timeline-section">
@@ -550,7 +561,7 @@
 </div>
 
 <!-- ===================== CHARTS TAB ===================== -->
-<div id="panel-charts" class="tab-panel">
+<div id="panel-charts" class="tab-panel active">
   <div class="page-wrap">
     <div class="charts-grid">
 
